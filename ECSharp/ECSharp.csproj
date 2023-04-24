@@ -8,7 +8,16 @@
         <CompilerGeneratedFilesOutputPath>generated</CompilerGeneratedFilesOutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
-
+    
+    <!--nuget-->
+    <PropertyGroup>
+        <Authors>FlaXxy</Authors>
+        <Version>0.0.1-preview</Version>
+        <PackageTags>ecs entity component system archetype multithreading performance</PackageTags>
+        <PackageProjectUrl>https://github.com/FlaXxy1/ECSharp</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+    
     <ItemGroup>
         <ProjectReference Include="..\SourceGen\SourceGen.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
