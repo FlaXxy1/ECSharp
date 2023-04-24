@@ -24,7 +24,7 @@ internal class ArchetypeDataStore
 	public void Remove(Entity entity)
 	{
 		var oldIndex = entity.Index;
-		if (oldIndex >= Count || oldIndex < 0 || entity.Store != this)
+		if (oldIndex >= Count || oldIndex < 0 || entity.Store != this || Count == 0)
 			throw new Exception();
 
 
@@ -34,7 +34,7 @@ internal class ArchetypeDataStore
 				componentStore.SetValue(componentStore.GetValue(Count - 1), oldIndex);
 			var lastEntity = Entities[Count - 1];
 			Entities[oldIndex] = lastEntity;
-			lastEntity.Index = oldIndex;
+			lastEntity!.Index = oldIndex;
 		}
 		else
 		{
@@ -49,11 +49,11 @@ internal class ArchetypeDataStore
 		Count--;
 	}
 
-    /// <summary>
-    ///     Allocates space for a new Entity.
-    /// </summary>
-    /// <returns></returns>
-    public int Allocate()
+	/// <summary>
+	///     Allocates space for a new Entity.
+	/// </summary>
+	/// <returns></returns>
+	public int Allocate()
 	{
 		if (Count >= CAPACITY)
 			throw new ArgumentOutOfRangeException();
@@ -61,13 +61,13 @@ internal class ArchetypeDataStore
 		return Count++;
 	}
 
-    /// <summary>
-    ///     Only Copies the Data of one entity to another Location.
-    /// </summary>
-    /// <param name="oldIndex"></param>
-    /// <param name="newLocation"></param>
-    /// <param name="newIndex"></param>
-    public void CopyDataTo(int oldIndex, ArchetypeDataStore newLocation, int newIndex)
+	/// <summary>
+	///     Only Copies the Data of one entity to another Location.
+	/// </summary>
+	/// <param name="oldIndex"></param>
+	/// <param name="newLocation"></param>
+	/// <param name="newIndex"></param>
+	public void CopyDataTo(int oldIndex, ArchetypeDataStore newLocation, int newIndex)
 	{
 		var oldComponentIndex = 0;
 		var newComponentIndex = 0;
@@ -105,12 +105,12 @@ internal class ArchetypeDataStore
 		}
 	}
 
-    /// <summary>
-    ///     Links the Entity to this DataStore.
-    /// </summary>
-    /// <param name="ntt"></param>
-    /// <param name="index"></param>
-    public void InitializeForEntity(Entity ntt, int index)
+	/// <summary>
+	///     Links the Entity to this DataStore.
+	/// </summary>
+	/// <param name="ntt"></param>
+	/// <param name="index"></param>
+	public void InitializeForEntity(Entity ntt, int index)
 	{
 		Entities[index] = ntt;
 		ntt.Store = this;
